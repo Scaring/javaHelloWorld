@@ -7,21 +7,31 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        final byte PERCENT = 100;
+        final byte MONTH_IN_YEAR = 12;
+
         Scanner scan = new Scanner(System.in);
         System.out.print("Principal: ");
+
         int principal = scan.nextInt();
         System.out.print("Annual Interest Rate: ");
+
         float yearRate = scan.nextFloat();
-        float monthRate = yearRate / 100 / 12;
+        float monthRate = yearRate / PERCENT / MONTH_IN_YEAR;
+
         System.out.print("Period (Years): ");
         byte period = scan.nextByte();
-        int paymants = period * 12;
-        double res = principal * (monthRate * Math.pow((1 + monthRate), paymants))
-                / (Math.pow((1 + monthRate), paymants) - 1);
+        int paymants = period * MONTH_IN_YEAR;
         scan.close();
-        double convertedRes = Math.round(res * 100) / 100.00;
-        NumberFormat cur = NumberFormat.getCurrencyInstance(Locale.US);
-        System.out.println("Mortgage: " + cur.format(convertedRes));
+
+        double mortgage = principal * (monthRate * Math.pow((1 + monthRate), paymants))
+                / (Math.pow((1 + monthRate), paymants) - 1);
+
+        double countedMortgage = Math.round(mortgage * 100) / 100.00;
+
+        String formatedMortgage = NumberFormat.getCurrencyInstance(Locale.US).format(countedMortgage);
+
+        System.out.println("Mortgage: " + formatedMortgage);
     }
 }
 
