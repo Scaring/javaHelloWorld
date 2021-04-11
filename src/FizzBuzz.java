@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class FizzBazz {
+public class FizzBuzz {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         byte inputNumber;
